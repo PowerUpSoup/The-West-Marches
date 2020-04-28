@@ -1,0 +1,65 @@
+.App_nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: #323e4e;
+    position: static;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+  }
+  
+  .App_nav a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: powderblue;
+    text-decoration: none;
+  }
+  
+  .App_nav a:hover {
+    color: yellow;
+    transition: color 0.6s ease;
+  }
+  body {
+    font-family: "Open Sans",
+    sans-serif; 
+    font-size: 20px;
+    color: #444;
+    text-align: center;
+    line-height: 1.5;
+  }
+  
+  nav,
+  footer {
+    padding: 1% 0;
+    background-color: #aaa;
+  }
+  
+  nav {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+  
+  
+  
+  header {
+    padding: 12% 0;
+  }
+  
+  section {
+    min-height: 200px;
+    padding: 6% 0;
+    background-color: #bbb;
+  }
+  
+  section:nth-child(even) {
+    background-color: #ddd;
+  }
+  
+  .Map {
+    max-width: 80%;
+  }
