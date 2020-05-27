@@ -41,6 +41,16 @@ const STORE = {
             "user_id": 3,
             "name": "quin's character"
         }
+    ],
+
+    "notices": [
+        {
+            "id": 100001,
+            "players": ["irene", "quinn"],
+            "characters": ["Peter Rabbit", "quin's character"],
+            "message": "This is a dummy message",
+            "status": "Open"
+        },
     ]
 }
 

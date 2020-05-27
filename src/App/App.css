@@ -63,3 +63,14 @@
   .Map {
     max-width: 80%;
   }
+
+  .Notices {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .Notice {
+    border: 1px solid black;
+    max-width: 300px;
+  }

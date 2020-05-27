@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import { Link } from 'react-router-dom';
 import Map from './components/Map.js';
 import Characters from './components/Characters';
-// import Noticeboard from './components/NoticeBoard';
+import NoticeBoard from './components/NoticeBoard';
 import ApiContext from '../ApiContext';
 
 class DMHomePage extends Component {
@@ -18,8 +18,7 @@ class DMHomePage extends Component {
                 return (
                     <div>
                         <Map />
-                        {/* <NoticeBoard /> */}
-                        this is the DMHomePage
+                        <NoticeBoard />
                     </div>
                 )
             }
@@ -28,8 +27,7 @@ class DMHomePage extends Component {
                     <div>
                         <Map />
                         <Characters />
-                        {/* <Noticeboard /> */}
-                        this is the PlayerHomePage
+                        <NoticeBoard />
                     </div>
                 )
             } else {

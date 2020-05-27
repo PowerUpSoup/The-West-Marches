@@ -25,7 +25,6 @@ class Characters extends Component {
             </div>
         )
     }
-
 }
 
 export default Characters;
