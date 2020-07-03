@@ -6,20 +6,47 @@ class Notice extends Component {
 
     static contextType = ApiContext;
 
+    getPlayerArray(playerArray) {
+        
+        this.context.noticePlayers.map((noticePlayer, key) => {
+            if (noticePlayer.notice_id === this.props.notice.id) {
+                playerArray.push(noticePlayer.name)
+            } else {
+                return null
+            }
+            return playerArray
+        })
+    }
+
+    getCharacterArray(characterArray) {
+        this.context.noticeCharacters.map((noticeCharacter, key) => {
+            if (noticeCharacter.notice_id === this.props.notice.id) {
+                characterArray.push(noticeCharacter.name)
+            } else {
+                return null
+            }
+            return characterArray
+        })
+    }
+
     render() {
+        let playerArray = []
+        let characterArray = []
         return (
             <div className="Notice">
                 {this.props.notice.message}
                 <br />
                 Players:
                 <ul className="Notice-Player-List">
-                    {this.props.notice.players.map((player, key) => {
+                    {this.getPlayerArray(playerArray)}
+                    {playerArray.map((player, key) => {
                         return(<li className="Notice-Player-Item" key={key}>{player}</li>)
                     })}
                 </ul>
                 Characters:
                 <ul className="Notice-Character-List">
-                    {this.props.notice.characters.map((character, key) => {
+                    {this.getCharacterArray(characterArray)}
+                    {characterArray.map((character, key) => {
                         return(<li className="Notice-Character-Item" key={key}>{character}</li>)
                     })}
                 </ul>

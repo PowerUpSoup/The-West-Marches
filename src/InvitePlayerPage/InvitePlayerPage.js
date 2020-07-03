@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ApiContext from '../ApiContext';
+import config from '../config';
 
 class InvitePlayerPage extends Component {
 
@@ -8,17 +9,30 @@ class InvitePlayerPage extends Component {
     handleSubmitAddPlayerAccount(e) {
         e.preventDefault();
         const user = {
-            "id": 10000,
             "username": this.refs.playerUsername.value,
             "password": this.refs.playerPassword.value,
             "email_address": this.refs.playerEmail.value,
             "role": this.refs.playerRole.value
         }
-        this.context.addUser(user);
-        this.props.history.push('/home')
-    }
+        fetch(`${config.API_BASE_URL}/users`, {
+            method: 'post',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ username:user.username, password:user.password, email_address:user.email_address, role:user.role })
+        }).then(res => {
+            if (!res.ok)
+                return res.json().then(e => Promise.reject(e))
+            return res.json()
+        })
+            .then((data) => {
+                this.context.addUser(data)
+                this.props.history.push('/home')
+            }).catch(error => {
+                console.error({ error })
+            })
+        }
 
     render() {
+
         return (
             <div>
                 <form onSubmit={(e) => {

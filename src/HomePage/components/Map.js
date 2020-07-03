@@ -7,15 +7,20 @@ class Map extends Component {
 
     static contextType = ApiContext;
 
+    componentDidMount() {
+
+    }
+
     render() {
-        if (this.context.loggedInUser.role === "dungeon_master") {
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+        if (sessionStorageUser.role === "dungeon_master") {
             return (
                 <div>
                     <img className="Map" src={dmMap} alt="The Dungeon Master's map of Barovia" />
                 </div>
             )
         }
-        else if (this.context.loggedInUser.role === "player") {
+        else if (sessionStorageUser.role === "player") {
             return (
                 <div>
                     <img className="Map" src={playerMap} alt="The Player's map of Barovia" />

@@ -1,23 +1,90 @@
 import React, { Component } from 'react';
 import ApiContext from '../ApiContext';
+import config from '../config';
 
 class NewNoticeForm extends Component {
     static contextType = ApiContext;
 
-    handleSubmitNewNoticeForm(e) {
-        e.preventDefault();
+
+    createNotice() {
+        debugger
         const notice = {
-            "id": 100000,
-            "players": [this.context.loggedInUser.username],
-            "characters": [this.refs.NewNoticeCharacter.value],
             "message": this.refs.NewNoticeMessage.value,
             "status": "Open"
         }
-        this.context.addNotice(notice)
+        const characterName = this.refs.NewNoticeCharacter.value
+        fetch(`${config.API_BASE_URL}/notices`, {
+            method: 'post',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ message: notice.message, status: notice.status })
+        }).then(res => {
+            if (!res.ok)
+                return res.json().then(e => Promise.reject(e))
+            return res.json()
+        })
+            .then((data) => {
+                this.createNoticePlayer(data)
+                this.createNoticeCharacter(data, characterName)
+                this.context.addNotice(data)
+            }).catch(error => {
+                console.error({ error })
+            })
+    }
+
+    createNoticePlayer(data) {
+        debugger
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+        const player = {
+            "notice_id": data.id,
+            "name": sessionStorageUser.username
+        }
+        fetch(`${config.API_BASE_URL}/notices/players`, {
+            method: 'post',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ notice_id: player.notice_id, name: player.name })
+        }).then(res => {
+            if (!res.ok)
+                return res.json().then(e => Promise.reject(e))
+            return res.json()
+        })
+            .then((data) => {
+                this.context.addNoticePlayer(data)
+            }).catch(error => {
+                console.error({ error })
+            })
+    }
+
+    createNoticeCharacter(data, characterName) {
+        debugger
+        const character = {
+            "notice_id": data.id,
+            "name": characterName
+        }
+        fetch(`${config.API_BASE_URL}/notices/characters`, {
+            method: 'post',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ notice_id: character.notice_id, name: character.name })
+        }).then(res => {
+            if (!res.ok)
+                return res.json().then(e => Promise.reject(e))
+            return res.json()
+        })
+            .then((data) => {
+                this.context.addNoticeCharacter(data)
+            }).catch(error => {
+                console.error({ error })
+            })
+    }
+
+    handleSubmitNewNoticeForm(e) {
+        e.preventDefault();
+        this.createNotice()
         this.props.history.push('/home')
     }
 
     render() {
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+
         return (
             <div>
                 <form id="newNoticeForm" onSubmit={(e) => {
@@ -28,14 +95,14 @@ class NewNoticeForm extends Component {
                         ref="NewNoticeCharacter"
                         required>
                         {this.context.characters.map((character, key) => {
-                            if (character.user_id === this.context.loggedInUser.id) {
+                            if (character.user_id === sessionStorageUser.id) {
                                 return (
                                     <option
                                         value={character.name}
                                         key={key}>{character.name}</option>
                                 )
                             } else {
-                                return(null)
+                                return (null)
                             }
                         })}
                     </select>

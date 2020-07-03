@@ -1,56 +1,98 @@
 import React, { Component } from 'react';
 import ApiContext from '../../ApiContext.js';
+import config from '../../config';
+
 
 class NoticeJoinButton extends Component {
 
     static contextType = ApiContext;
 
     addNewCharacterToNotice() {
-        this.props.notice.characters.push(this.refs.NewNoticeCharacter.value)
+        const noticeCharacter = {
+            "notice_id": this.props.notice.id,
+            "name": this.refs.NewNoticeCharacter.value
+        }
+        fetch(`${config.API_BASE_URL}/notices/characters`, {
+            method: 'post',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ notice_id: noticeCharacter.notice_id, name: noticeCharacter.name })
+        }).then(res => {
+            if (!res.ok)
+                return res.json().then(e => Promise.reject(e))
+            return res.json()
+        })
+            .then((data) => {
+                this.context.addNoticeCharacter(data)
+            }).catch(error => {
+                console.error({ error })
+            })
     }
 
+
     addNewPlayerToNotice() {
-        this.props.notice.players.push(this.context.loggedInUser.username)
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+        const noticePlayer = {
+            "notice_id": this.props.notice.id,
+            "name": sessionStorageUser.username
+        }
+        fetch(`${config.API_BASE_URL}/notices/players`, {
+            method: 'post',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ notice_id: noticePlayer.notice_id, name: noticePlayer.name })
+        }).then(res => {
+            if (!res.ok)
+                return res.json().then(e => Promise.reject(e))
+            return res.json()
+        })
+            .then((data) => {
+                this.context.addNoticePlayer(data)
+            }).catch(error => {
+                console.error({ error })
+            })
     }
 
     handleSubmitNoticeJoinForm(e) {
         e.preventDefault();
         this.addNewCharacterToNotice()
         this.addNewPlayerToNotice()
-        const join = {
-            "id": this.props.notice.id,
-            "players": this.props.notice.players,
-            "characters": this.props.notice.characters,
-            "message": this.props.notice.message,
-            "status": "Open"
-        }
-        this.context.joinNotice(join)
+        window.location.reload()
     }
 
     handleDMPickupNoticeSubmit(e) {
         e.preventDefault();
         const join = {
             "id": this.props.notice.id,
-            "players": this.props.notice.players,
-            "characters": this.props.notice.characters,
             "message": this.props.notice.message,
-            "status": "Picked-Up"
+            "status": "Picked Up"
         }
-        this.context.joinNotice(join)
-        debugger
+        fetch(`${config.API_BASE_URL}/notices/${join.id}`, {
+            method: 'put',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ status: join.status })
+        }).then(res => {
+            if (!res.ok)
+                return res.json().then(e => Promise.reject(e))
+            return res.json()
+        })
+            .then((data) => {
+                this.context.joinNotice(join)
+            }).catch(error => {
+                console.error({ error })
+            })
     }
 
     render() {
-        if (this.context.loggedInUser.role === "dungeon_master") {
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+        if (sessionStorageUser.role === "dungeon_master") {
             return (
-                <div> 
+                <div>
                     <button className="dm-pickup-notice-button" onClick={(e) => {
                         this.handleDMPickupNoticeSubmit(e)
                     }}>
                         Pick up!</button>
                 </div>
             )
-        } else if (this.context.loggedInUser.role === "player") {
+        } else if (sessionStorageUser.role === "player") {
             return (
                 <div>
                     <form id="NoticeJoinButtonForm" onSubmit={(e) => {
@@ -61,7 +103,7 @@ class NoticeJoinButton extends Component {
                             ref="NewNoticeCharacter"
                             required>
                             {this.context.characters.map((character, key) => {
-                                if (character.user_id === this.context.loggedInUser.id) {
+                                if (character.user_id === sessionStorageUser.id) {
                                     return (
                                         <option
                                             value={character.name}

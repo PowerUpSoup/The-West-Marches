@@ -1,26 +1,40 @@
 import React, { Component } from 'react';
 import apiContext from '../ApiContext';
+import config from '../config';
 
 class NewCharacterCreation extends Component {
 
     static contextType = apiContext;
 
-    handleSubmitCharacterCreate = (e) => {
+    handleSubmitCharacterCreate = (e, sessionStorageUser) => {
         e.preventDefault();
         const character = {
-            "id": 2, 
-            "user_id": this.context.loggedInUser.id,
+            "user_id": sessionStorageUser.id,
             "name": this.refs.characterUsername.value
         }
-        this.context.addCharacter(character)
-        this.props.history.push('/home')
-    }
+        fetch(`${config.API_BASE_URL}/characters`, {
+            method: 'post',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ user_id:character.user_id, name:character.name })
+        }).then(res => {
+            if (!res.ok)
+                return res.json().then(e => Promise.reject(e))
+            return res.json()
+        })
+            .then((data) => {
+                this.context.addCharacter(data)
+                this.props.history.push('/home')
+            }).catch(error => {
+                console.error({ error })
+            })
+        }
 
     render() {
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
         return (
             <div>
                 <form onSubmit={(e) => {
-                    this.handleSubmitCharacterCreate(e)
+                    this.handleSubmitCharacterCreate(e, sessionStorageUser)
                 }}>
                     <label>Character Name:</label>
                     <input type="text"

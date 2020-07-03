@@ -7,8 +7,14 @@ class NoticeBoard extends Component {
 
     static contextType = ApiContext;
 
+    componentDidMount() {
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+        this.setState({ loggedInUser: sessionStorageUser})
+    }
+
     render() {
-        if (this.context.loggedInUser.role === "dungeon_master") {
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+        if (sessionStorageUser.role === "dungeon_master") {
             return (
                 <div>
                     <div className="Notices">
@@ -20,7 +26,7 @@ class NoticeBoard extends Component {
                     </div>
                 </div>
             )
-        } else if (this.context.loggedInUser.role === "player") {
+        } else if (sessionStorageUser.role === "player") {
             return (
                 <div>
                     <Link to="/new-notice">Create New Notice</Link>
