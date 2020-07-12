@@ -5,9 +5,11 @@ import config from '../config';
 class NewNoticeForm extends Component {
     static contextType = ApiContext;
 
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     createNotice() {
-        debugger
         const notice = {
             "message": this.refs.NewNoticeMessage.value,
             "status": "Open"
@@ -32,7 +34,6 @@ class NewNoticeForm extends Component {
     }
 
     createNoticePlayer(data) {
-        debugger
         let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
         const player = {
             "notice_id": data.id,
@@ -55,7 +56,6 @@ class NewNoticeForm extends Component {
     }
 
     createNoticeCharacter(data, characterName) {
-        debugger
         const character = {
             "notice_id": data.id,
             "name": characterName

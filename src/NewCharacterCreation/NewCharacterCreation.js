@@ -6,11 +6,12 @@ class NewCharacterCreation extends Component {
 
     static contextType = apiContext;
 
-    handleSubmitCharacterCreate = (e, sessionStorageUser) => {
+    handleSubmitCharacterCreate = (e) => {
         e.preventDefault();
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
         const character = {
             "user_id": sessionStorageUser.id,
-            "name": this.refs.characterUsername.value
+            "name": this.refs.characterUsername.value.toLowerCase()
         }
         fetch(`${config.API_BASE_URL}/characters`, {
             method: 'post',
@@ -30,11 +31,10 @@ class NewCharacterCreation extends Component {
         }
 
     render() {
-        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
         return (
             <div>
                 <form onSubmit={(e) => {
-                    this.handleSubmitCharacterCreate(e, sessionStorageUser)
+                    this.handleSubmitCharacterCreate(e)
                 }}>
                     <label>Character Name:</label>
                     <input type="text"

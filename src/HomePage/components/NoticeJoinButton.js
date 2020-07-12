@@ -7,6 +7,10 @@ class NoticeJoinButton extends Component {
 
     static contextType = ApiContext;
 
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     addNewCharacterToNotice() {
         const noticeCharacter = {
             "notice_id": this.props.notice.id,
@@ -107,7 +111,7 @@ class NoticeJoinButton extends Component {
                                     return (
                                         <option
                                             value={character.name}
-                                            key={key}>{character.name}</option>
+                                            key={key}>{this.capitalizeFirstLetter(character.name)}</option>
                                     )
                                 } else {
                                     return (null)

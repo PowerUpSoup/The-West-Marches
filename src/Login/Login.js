@@ -21,6 +21,17 @@ class Login extends Component {
         }
     }
 
+    hideIncorrectPasswordMessage() {
+        const passwordMessage = document.querySelector('.incorrectUsernameOrPasswordMessage')
+
+        passwordMessage.classList.add('hidden')
+    }
+
+    showIncorrectPasswordMessage() {
+        const passwordMessage = document.querySelector('.incorrectUsernameOrPasswordMessage')
+
+        passwordMessage.classList.remove('hidden')
+    }
 
     render() {
         return (
@@ -52,6 +63,7 @@ class Login extends Component {
                                 required />
                         </div>
                         <button type="submit">Submit</button>
+                        <p className="incorrectUsernameOrPasswordMessage hidden">Incorrect Username or Password, please try again</p>
                     </form>
                 </section>
             </div>

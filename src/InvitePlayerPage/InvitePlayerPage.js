@@ -9,8 +9,8 @@ class InvitePlayerPage extends Component {
     handleSubmitAddPlayerAccount(e) {
         e.preventDefault();
         const user = {
-            "username": this.refs.playerUsername.value,
-            "password": this.refs.playerPassword.value,
+            "username": this.refs.playerUsername.value.toLowerCase(),
+            "password": this.refs.playerPassword.value.toLowerCase(),
             "email_address": this.refs.playerEmail.value,
             "role": this.refs.playerRole.value
         }

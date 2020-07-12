@@ -5,6 +5,10 @@ import ApiContext from '../../ApiContext';
 class Characters extends Component {
     static contextType = ApiContext;
 
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     render() {
         let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
 
@@ -16,7 +20,7 @@ class Characters extends Component {
                     if (character.user_id === sessionStorageUser.id) {
                         return (
                             <li key={key}>
-                                {character.name}
+                                {this.capitalizeFirstLetter(character.name)}
                             </li>
                         )
                     } else {

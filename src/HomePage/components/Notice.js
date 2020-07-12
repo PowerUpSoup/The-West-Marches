@@ -6,11 +6,15 @@ class Notice extends Component {
 
     static contextType = ApiContext;
 
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     getPlayerArray(playerArray) {
         
         this.context.noticePlayers.map((noticePlayer, key) => {
             if (noticePlayer.notice_id === this.props.notice.id) {
-                playerArray.push(noticePlayer.name)
+                playerArray.push((this.capitalizeFirstLetter(noticePlayer.name)))
             } else {
                 return null
             }
@@ -21,8 +25,7 @@ class Notice extends Component {
     getCharacterArray(characterArray) {
         this.context.noticeCharacters.map((noticeCharacter, key) => {
             if (noticeCharacter.notice_id === this.props.notice.id) {
-                characterArray.push(noticeCharacter.name)
-            } else {
+                characterArray.push((this.capitalizeFirstLetter(noticeCharacter.name)))            } else {
                 return null
             }
             return characterArray
