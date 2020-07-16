@@ -36,12 +36,12 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <section id="splash-page">
+                <section className="splashPage" id="splash-page">
                     <header>
                         <h1>Welcome to the West Marches!</h1>
                     </header>
                 </section>
-                <section id='login-form-section'>
+                <section className="loginFormSection" id='login-form-section'>
                     <form id="login-form" onSubmit={(e) => {
                         this.handleSubmitLogin(e)
                     }}>

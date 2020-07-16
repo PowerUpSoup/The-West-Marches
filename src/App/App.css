@@ -1,37 +1,4 @@
-.App_nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    background-color: #323e4e;
-    position: static;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50px;
-  }
-  
-  .App_nav a {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color: powderblue;
-    text-decoration: none;
-  }
-  
-  .App_nav a:hover {
-    color: yellow;
-    transition: color 0.6s ease;
-  }
-  body {
-    font-family: "Open Sans",
-    sans-serif; 
-    font-size: 20px;
-    color: #444;
-    text-align: center;
-    line-height: 1.5;
-  }
-  
-  nav,
-  footer {
+nav,footer {
     padding: 1% 0;
     background-color: #aaa;
   }
@@ -42,10 +9,40 @@
     left: 0;
     right: 0;
     z-index: 10;
+    background-color: rgb(77, 94, 150);
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  nav a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: powderblue;
+    text-decoration: none;
   }
   
+  nav a:hover {
+    color: yellow;
+    transition: color 0.6s ease;
+  }
+
+  body {
+    font-family: "Open Sans",
+    sans-serif; 
+    font-size: 20px;
+    color: #444;
+    text-align: center;
+    line-height: 1.5;
+  }
   
+  .splashPage {
+    background-color: rgb(120, 139, 199);
+  }
   
+  .loginFormSection {
+    padding-top: 80px;
+  }
+
   header {
     padding: 12% 0;
   }
@@ -62,19 +59,137 @@
   
   .Map {
     max-width: 80%;
+    padding: 10px;
+  }
+
+  .CharactersHomePageDiv {
+    background-color: rgb(120, 139, 199);
+    padding-bottom: 10px;
+  }
+
+  .homepageCharacterListHeader{
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  .homepageCharacterList {
+    margin-top: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    font-size: medium;
+  }
+
+  .CreateNewCharacterButton {
+    color: rgb(216, 248, 252);
+    text-decoration: none; 
+  }
+
+  .CreateNewCharacterButton:hover {
+    color: yellow;
+    transition: color 0.6s ease;
   }
 
   .Notices {
+    padding-top: 10px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .CreateNewNoticeButton {
+    color: rgb(50, 65, 66);
+    text-decoration: none; 
+  }
+
+  .CreateNewNoticeButton:hover {
+    color: rgb(190, 190, 32);
+    transition: color 0.6s ease;
   }
 
   .Notice {
     border: 1px solid black;
     max-width: 300px;
+    margin-top: 20px;
+    width: 100%;
+    font-weight: bold;
+  }
+
+  .Notice-Player-List {
+    font-weight: normal;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: medium;
+  }
+
+  .Notice-Character-List {
+    font-weight: normal;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: medium;
+  }
+
+  .NoticeJoinButtonForm {
+    background-color: rgb(120, 139, 199);
+  }
+
+  .createCharacterDiv {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .createCharacterMessage a {
+    color: powderblue;
+    background-color: rgb(77, 94, 150);
+    text-decoration: none; 
+    padding: 10px;
+    border: black solid 1px;
+  }
+
+  .createCharacterMessage a:hover {
+    color: yellow;
+    transition: color 0.6s ease;
   }
 
   .hidden { 
     display: none;
   }
+
+  @media screen and (min-width: 1000px) {
+    .Map {
+      max-width: 60%;
+      padding-left: 20%;
+      padding-right: 20%;
+      padding: 10px;
+    }
+  
+}
+
+@media screen and (min-width: 1250px) {
+  .Map {
+    max-width: 40%;
+    padding-left: 30%;
+    padding-right: 30%;
+    padding: 10px;
+  }
+
+}
+
+@media screen and (min-width: 2000px) {
+  nav {
+    padding-left: 30%;
+    padding-right: 30%;
+  }
+  
+  .Map {
+    max-width: 20%;
+    padding-left: 40%;
+    padding-right: 40%;
+    padding: 10px;
+  }
+
+
+}

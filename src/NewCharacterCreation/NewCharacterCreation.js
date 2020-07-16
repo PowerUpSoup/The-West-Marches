@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import apiContext from '../ApiContext';
 import config from '../config';
 
@@ -24,15 +26,22 @@ class NewCharacterCreation extends Component {
         })
             .then((data) => {
                 this.context.addCharacter(data)
-                this.props.history.push('/home')
+                this.showInviteSuccessMessage()
             }).catch(error => {
                 console.error({ error })
             })
         }
 
+        showInviteSuccessMessage() {
+            const InviteSuccessMessage = document.querySelector('.createCharacterMessage')
+    
+            InviteSuccessMessage.classList.remove('hidden')
+        }
+
+
     render() {
         return (
-            <div>
+            <div className="createCharacterDiv">
                 <form onSubmit={(e) => {
                     this.handleSubmitCharacterCreate(e)
                 }}>
@@ -43,6 +52,10 @@ class NewCharacterCreation extends Component {
                         ref="characterUsername"
                         required />
                 </form>
+                <section className="createCharacterMessage hidden">
+                    <p>Character Successfully Created</p>
+                    <Link className="createCharacterMessageHomeButton" to="/home">Return to Home</Link>
+                </section>
             </div>
         )
     }

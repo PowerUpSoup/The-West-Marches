@@ -80,8 +80,6 @@ class App extends Component {
     this.setState({
       notice: this.state.notices.push(notice)
     })
-    debugger
-    this.props.history.push('/home')
   }
 
   addNoticePlayer = noticePlayer => {
@@ -122,6 +120,7 @@ class App extends Component {
     } if (this.state.loggedInUser.role === 'player') {
       return (
         <nav>
+          <Link to="/home">Home</Link>
           <Link to="/" onClick={() => this.logOutUser()}>Logout</Link>
         </nav>
       )

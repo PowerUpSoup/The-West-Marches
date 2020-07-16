@@ -12,6 +12,7 @@ class NoticeJoinButton extends Component {
     }
 
     addNewCharacterToNotice() {
+        
         const noticeCharacter = {
             "notice_id": this.props.notice.id,
             "name": this.refs.NewNoticeCharacter.value
@@ -34,6 +35,7 @@ class NoticeJoinButton extends Component {
 
 
     addNewPlayerToNotice() {
+        
         let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
         const noticePlayer = {
             "notice_id": this.props.notice.id,
@@ -59,7 +61,7 @@ class NoticeJoinButton extends Component {
         e.preventDefault();
         this.addNewCharacterToNotice()
         this.addNewPlayerToNotice()
-        window.location.reload()
+        
     }
 
     handleDMPickupNoticeSubmit(e) {
@@ -99,7 +101,7 @@ class NoticeJoinButton extends Component {
         } else if (sessionStorageUser.role === "player") {
             return (
                 <div>
-                    <form id="NoticeJoinButtonForm" onSubmit={(e) => {
+                    <form id="NoticeJoinButtonForm" className="NoticeJoinButtonForm" onSubmit={(e) => {
                         this.handleSubmitNoticeJoinForm(e)
                     }}>
                         <label name="choose-character">Choose Your Character:</label>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import ApiContext from '../ApiContext';
 import config from '../config';
 
@@ -25,10 +26,16 @@ class InvitePlayerPage extends Component {
         })
             .then((data) => {
                 this.context.addUser(data)
-                this.props.history.push('/home')
+                this.showInviteSuccessMessage()
             }).catch(error => {
                 console.error({ error })
             })
+        }
+    
+        showInviteSuccessMessage() {
+            const InviteSuccessMessage = document.querySelector('.inviteSuccessMessage')
+    
+            InviteSuccessMessage.classList.remove('hidden')
         }
 
     render() {
@@ -43,28 +50,32 @@ class InvitePlayerPage extends Component {
                         name="create-username"
                         placeholder="player's name"
                         ref="playerUsername"
-                        required />
+                        required /> <br />
                     <label>Player Password:</label>
                     <input type="text"
                         name="create-password"
                         placeholder="player's password"
                         ref="playerPassword"
-                        required />
+                        required /> <br />
                     <label>Player Email:</label>
                     <input type="text"
                         name="create-email"
                         placeholder="player's email"
                         ref="playerEmail"
-                        required />
+                        required /> <br />
                     <label>Player Role:</label>
                     <select id="role-select"
                         ref="playerRole"
                         required>
                         <option value='player'>Player</option>
                         <option value='dungeon_master'>Dungeon Master</option>
-                    </select>
+                    </select> <br />
                     <button type="submit">Submit</button>
                 </form>
+                <section className="inviteSuccessMessage hidden">
+                    <p>Player Successfully Added</p>
+                    <Link to="/home">Return to Home</Link>
+                </section>
             </div>
         )
     }

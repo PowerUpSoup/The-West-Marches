@@ -90,7 +90,7 @@ class NewNoticeForm extends Component {
                 <form id="newNoticeForm" onSubmit={(e) => {
                     this.handleSubmitNewNoticeForm(e)
                 }}>
-                    <label name="choose-character">Choose Your Character:</label>
+                    <label name="choose-character">Choose Your Character:</label> <br />
                     <select id="character-select"
                         ref="NewNoticeCharacter"
                         required>
@@ -105,13 +105,14 @@ class NewNoticeForm extends Component {
                                 return (null)
                             }
                         })}
-                    </select>
-                    <label name="message">Write a message:</label>
+                    </select> <br />
+                    <label name="message">Write a message:</label> <br />
                     <textarea
                         className="newNoticeMessageText"
                         ref="NewNoticeMessage"
                         placeholder="What will you do on this adventure?"
                         required />
+                        <br />
 
                     <button type="submit">Submit</button>
                 </form>

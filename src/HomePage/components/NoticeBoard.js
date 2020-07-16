@@ -16,7 +16,6 @@ class NoticeBoard extends Component {
         let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
         if (sessionStorageUser.role === "dungeon_master") {
             return (
-                <div>
                     <div className="Notices">
                         {this.context.notices.map((notice, key) => {
                                 return <Notice
@@ -24,13 +23,11 @@ class NoticeBoard extends Component {
                                     notice={notice} />
                         })}
                     </div>
-                </div>
             )
         } else if (sessionStorageUser.role === "player") {
             return (
-                <div>
-                    <Link to="/new-notice">Create New Notice</Link>
-                    <div className="Notices">
+                <div className="Notices">
+                    <Link className="CreateNewNoticeButton" to="/new-notice">Create New Notice</Link>
                         {this.context.notices.map((notice, key) => {
                             if (notice.status === "Open") {
                                 return <Notice
@@ -40,7 +37,6 @@ class NoticeBoard extends Component {
                                 return null
                             }
                         })}
-                    </div>
                 </div>
             )
         } else {
