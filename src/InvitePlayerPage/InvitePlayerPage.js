@@ -74,7 +74,7 @@ class InvitePlayerPage extends Component {
                 </form>
                 <section className="inviteSuccessMessage hidden">
                     <p>Player Successfully Added</p>
-                    <Link to="/home">Return to Home</Link>
+                    <Link className="invitePlayerMessageHomeButton" to="/home">Return to Home</Link>
                 </section>
             </div>
         )

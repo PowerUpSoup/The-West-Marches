@@ -51,7 +51,7 @@ class NewCharacterCreation extends Component {
                         placeholder="Charater Name:"
                         ref="characterUsername"
                         required />
-                </form>
+                </form> <br />
                 <section className="createCharacterMessage hidden">
                     <p>Character Successfully Created</p>
                     <Link className="createCharacterMessageHomeButton" to="/home">Return to Home</Link>

@@ -61,7 +61,6 @@ class NoticeJoinButton extends Component {
         e.preventDefault();
         this.addNewCharacterToNotice()
         this.addNewPlayerToNotice()
-        
     }
 
     handleDMPickupNoticeSubmit(e) {

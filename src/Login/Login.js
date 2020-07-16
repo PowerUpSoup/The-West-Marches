@@ -17,7 +17,7 @@ class Login extends Component {
             sessionStorage.setItem("user", JSON.stringify(this.user))
             this.props.history.push('/home')
             } else {
-                return (null)
+                this.showIncorrectPasswordMessage()
         }
     }
 
@@ -40,6 +40,8 @@ class Login extends Component {
                     <header>
                         <h1>Welcome to the West Marches!</h1>
                     </header>
+                    For the purposes of this demo, you can login as a Dungeon Master to add new players and pick up notices with username:admin password:admin <br />
+                    You can log in as a player to create characters, create new notices, and join notices that already exist with username:player password:player
                 </section>
                 <section className="loginFormSection" id='login-form-section'>
                     <form id="login-form" onSubmit={(e) => {
