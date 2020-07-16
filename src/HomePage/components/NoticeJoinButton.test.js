@@ -3,14 +3,14 @@ import React from 'react';
 import { shallow } from 'enzyme'
 import { BrowserRouter } from 'react-router-dom';
 import toJson from 'enzyme-to-json'
-import App from './App';
+import NoticeJoinButton from './NoticeJoinButton';
 
-describe(`App component`, () => {
+describe(`NoticeJoinButton component`, () => {
 
-    it('renders a App', () => {
+    it('renders a NoticeJoinButton', () => {
         const wrapper = shallow(
             <BrowserRouter>
-                <App />
+                <NoticeJoinButton />
             </BrowserRouter>
         )
         expect(toJson(wrapper)).toMatchSnapshot()

@@ -3,14 +3,14 @@ import React from 'react';
 import { shallow } from 'enzyme'
 import { BrowserRouter } from 'react-router-dom';
 import toJson from 'enzyme-to-json'
-import App from './App';
+import Characters from './Characters';
 
-describe(`App component`, () => {
+describe(`Characters component`, () => {
 
-    it('renders a App', () => {
+    it('renders a Characters', () => {
         const wrapper = shallow(
             <BrowserRouter>
-                <App />
+                <Characters />
             </BrowserRouter>
         )
         expect(toJson(wrapper)).toMatchSnapshot()
