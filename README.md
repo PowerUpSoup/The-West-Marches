@@ -5,3 +5,20 @@ A "The West Marches" style Dungeons and Dragons game involves a setting with a m
 ![The Player Home Page of the West Marches App](Screenshot.png?raw=true "The West Marches")
 
 This application was made using React, CSS, Node, Express, and PostgreSQL.
+
+There is also an api for managing calls to a server. This is a RESTful api for managing users, characters notices and players and characters associated with notices.
+
+Scripts
+Start the application npm start
+
+Start nodemon for the application npm run dev
+
+Run the tests npm test
+
+Endpoints
+
+/users 
+/characters 
+/notices 
+/notices/players 
+/notices/characters
