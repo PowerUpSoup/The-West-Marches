@@ -12,7 +12,7 @@ class NoticeJoinButton extends Component {
     }
 
     addNewCharacterToNotice() {
-        
+
         const noticeCharacter = {
             "notice_id": this.props.notice.id,
             "name": this.refs.NewNoticeCharacter.value
@@ -27,7 +27,7 @@ class NoticeJoinButton extends Component {
             return res.json()
         })
             .then((data) => {
-                this.context.addNoticeCharacter(data)
+                this.context.addNoticeCharacter(data);
             }).catch(error => {
                 console.error({ error })
             })
@@ -35,8 +35,8 @@ class NoticeJoinButton extends Component {
 
 
     addNewPlayerToNotice() {
-        
-        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
         const noticePlayer = {
             "notice_id": this.props.notice.id,
             "name": sessionStorageUser.username
@@ -51,7 +51,7 @@ class NoticeJoinButton extends Component {
             return res.json()
         })
             .then((data) => {
-                this.context.addNoticePlayer(data)
+                this.context.addNoticePlayer(data);
             }).catch(error => {
                 console.error({ error })
             })
@@ -59,8 +59,8 @@ class NoticeJoinButton extends Component {
 
     handleSubmitNoticeJoinForm(e) {
         e.preventDefault();
-        this.addNewCharacterToNotice()
-        this.addNewPlayerToNotice()
+        this.addNewCharacterToNotice();
+        this.addNewPlayerToNotice();
     }
 
     handleDMPickupNoticeSubmit(e) {
@@ -80,28 +80,64 @@ class NoticeJoinButton extends Component {
             return res.json()
         })
             .then((data) => {
-                this.context.joinNotice(join)
+                this.context.joinNotice(join);
+            }).catch(error => {
+                console.error({ error })
+            })
+    }
+
+    handleDMCloseNoticeSubmit(e) {
+        e.preventDefault();
+        const join = {
+            "id": this.props.notice.id,
+            "message": this.props.notice.message,
+            "status": "Closed"
+        }
+        fetch(`${config.API_BASE_URL}/notices/${join.id}`, {
+            method: 'put',
+            headers: { 'content-Type': 'application/json' },
+            body: JSON.stringify({ status: join.status })
+        }).then(res => {
+            if (!res.ok)
+                return res.json().then(e => Promise.reject(e))
+            return res.json()
+        })
+            .then((data) => {
+                this.context.joinNotice(join);
             }).catch(error => {
                 console.error({ error })
             })
     }
 
     render() {
-        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
         if (sessionStorageUser.role === "dungeon_master") {
-            return (
-                <div>
-                    <button className="dm-pickup-notice-button" onClick={(e) => {
-                        this.handleDMPickupNoticeSubmit(e)
-                    }}>
-                        Pick up!</button>
-                </div>
-            )
+                if (this.props.notice.status === "Open") {
+                    return (
+                        <div>
+                            <button className="dm-pickup-notice-button" onClick={(e) => {
+                                this.handleDMPickupNoticeSubmit(e);
+                            }}>
+                                Pick up!</button>
+                        </div>
+                    );
+            } if (this.props.notice.status === "Picked Up") {
+                return (
+                    <div>
+                        <button className="dm-pickup-notice-button" onClick={(e) => {
+                            this.handleDMCloseNoticeSubmit(e);
+                        }}>
+                            Close</button>
+                    </div>
+                );
+            } else {
+                return (null);
+            };
         } else if (sessionStorageUser.role === "player") {
             return (
                 <div>
                     <form id="NoticeJoinButtonForm" className="NoticeJoinButtonForm" onSubmit={(e) => {
-                        this.handleSubmitNoticeJoinForm(e)
+                        this.handleSubmitNoticeJoinForm(e);
                     }}>
                         <label name="choose-character">Choose Your Character:</label>
                         <select id="character-select"
@@ -115,16 +151,16 @@ class NoticeJoinButton extends Component {
                                             key={key}>{this.capitalizeFirstLetter(character.name)}</option>
                                     )
                                 } else {
-                                    return (null)
-                                }
+                                    return (null);
+                                };
                             })}
                         </select>
                         <button className="NoticeJoinButton" type="submit">Join this Adventure!</button>
                     </form>
                 </div>
-            )
-        }
-    }
+            );
+        };
+    };
 }
 
 export default NoticeJoinButton;

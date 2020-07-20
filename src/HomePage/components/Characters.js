@@ -10,7 +10,7 @@ class Characters extends Component {
     }
 
     render() {
-        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
 
         return (
             <div className="CharactersHomePageDiv">
@@ -25,12 +25,12 @@ class Characters extends Component {
                             </li>
                         )
                     } else {
-                        return null
-                    }
+                        return null;
+                    };
                 })}
                 </ul>
             </div>
-        )
+        );
     }
 }
 

@@ -53,59 +53,59 @@ class App extends Component {
   }
 
   logOutUser() {
-    sessionStorage.clear()
+    sessionStorage.clear();
     this.setState({
       loggedInUser: null
-    })
+    });
   }
 
   updateLoggedInUser = user => {
     this.setState({
       loggedInUser: user
-    })
+    });
   }
   addUser = user => {
     this.setState({
       user: this.state.users.push(user)
-    })
+    });
   }
 
   addCharacter = character => {
     this.setState({
       character: this.state.characters.push(character)
-    })
+    });
   }
 
   addNotice = notice => {
     this.setState({
       notice: this.state.notices.push(notice)
-    })
+    });
   }
 
   addNoticePlayer = noticePlayer => {
     this.setState({
       noticePlayer: this.state.noticePlayers.push(noticePlayer)
-    })
+    });
   }
 
   addNoticeCharacter = noticeCharacter => {
     this.setState({
       noticeCharacter: this.state.noticeCharacters.push(noticeCharacter)
-    })
+    });
   }
 
   joinNotice = join => {
-    let newNotices = []
+    let newNotices = [];
     this.state.notices.forEach((notice) => {
       if (join.id === notice.id) {
-        newNotices.push(join)
+        newNotices.push(join);
       } else {
-        newNotices.push(notice)
+        newNotices.push(notice);
       }
-    })
+    });
     this.setState({
       notices: newNotices
-    })
+    });
   }
 
   renderNav() {
@@ -116,16 +116,16 @@ class App extends Component {
           <Link to="/invite-player">Add New Player</Link>
           <Link to="/" onClick={() => this.logOutUser()}>Logout</Link>
         </nav>
-      )
+      );
     } if (this.state.loggedInUser.role === 'player') {
       return (
         <nav>
           <Link to="/home">Home</Link>
           <Link to="/" onClick={() => this.logOutUser()}>Logout</Link>
         </nav>
-      )
+      );
     } else {
-      return (null)
+      return (null);
     }
   }
 

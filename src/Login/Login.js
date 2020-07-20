@@ -11,32 +11,35 @@ class Login extends Component {
         const username = this.refs.loginUsername.value.toLowerCase();
         const password = this.refs.loginPassword.value;
         const { users = [] } = this.context;
-        this.user = users.find(user => username === user.username) || ("Invalid Username or Password")
+        this.user = users.find(user => username === user.username) || ("Invalid Username or Password");
         if (this.user.password === password) {
-            this.context.updateLoggedInUser(this.user)
-            sessionStorage.setItem("user", JSON.stringify(this.user))
-            this.props.history.push('/home')
+            this.context.updateLoggedInUser(this.user);
+            sessionStorage.setItem("user", JSON.stringify(this.user));
+            this.props.history.push('/home');
             } else {
-                this.showIncorrectPasswordMessage()
+                this.showIncorrectPasswordMessage();
         }
     }
 
     hideIncorrectPasswordMessage() {
-        const passwordMessage = document.querySelector('.incorrectUsernameOrPasswordMessage')
+        const passwordMessage = document.querySelector('.incorrectUsernameOrPasswordMessage');
 
-        passwordMessage.classList.add('hidden')
+        passwordMessage.classList.add('hidden');
     }
 
     showIncorrectPasswordMessage() {
-        const passwordMessage = document.querySelector('.incorrectUsernameOrPasswordMessage')
+        const passwordMessage = document.querySelector('.incorrectUsernameOrPasswordMessage');
 
-        passwordMessage.classList.remove('hidden')
+        passwordMessage.classList.remove('hidden');
     }
 
     render() {
         return (
             <div>
                 <section className="splashPage" id="splash-page">
+                    <p>This app is intended to help Dungeon Masters with too many players to easily coordinate. 'The West Marches' is a style of Dungeons and Dragons game where the players decide where they want to adventure to. <br />
+                    The app has a noticeboard feature, where players can create notices with a message about what type of adventure they want to go on. Then other players can join the adventure, and when the Dungeon Master feels like the players are properly organized, they can pick up the adventure, signaling they are ready to meet up with their players and run the game. <br />
+                    </p>
                     <header>
                         <h1>Welcome to the West Marches!</h1>
                     </header>
@@ -69,8 +72,8 @@ class Login extends Component {
                     </form>
                 </section>
             </div>
-        )
-    }
+        );
+    };
 }
 
 export default Login;

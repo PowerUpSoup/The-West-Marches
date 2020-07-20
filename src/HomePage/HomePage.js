@@ -10,7 +10,7 @@ class HomePage extends Component {
     static contextType = ApiContext;
     
     render() {
-        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
         
         if (sessionStorageUser.role === "dungeon_master") {
             return (
@@ -18,7 +18,7 @@ class HomePage extends Component {
                     <Map />
                     <NoticeBoard />
                 </div>
-            )
+            );
         }
         else if(sessionStorageUser.role === "player") {
             return (
@@ -27,11 +27,11 @@ class HomePage extends Component {
                     <Characters />
                     <NoticeBoard />
                 </div>
-            )
+            );
         } else {
-            this.props.history.push('/')
-            return (null)
-        }
+            this.props.history.push('/');
+            return (null);
+        };
     }
 }
 

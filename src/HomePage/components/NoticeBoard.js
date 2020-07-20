@@ -8,22 +8,28 @@ class NoticeBoard extends Component {
     static contextType = ApiContext;
 
     componentDidMount() {
-        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
-        this.setState({ loggedInUser: sessionStorageUser})
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
+        this.setState({ loggedInUser: sessionStorageUser});
     }
 
     render() {
-        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
         if (sessionStorageUser.role === "dungeon_master") {
             return (
                     <div className="Notices">
                         {this.context.notices.map((notice, key) => {
+                            if (notice.status === "Closed") {
+                                    return (null);
+                                } else if (notice.status === "Open" || "Picked Up") {
                                 return <Notice
                                     key={key}
                                     notice={notice} />
+                                } else {
+                                    return (null);
+                                }
                         })}
                     </div>
-            )
+            );
         } else if (sessionStorageUser.role === "player") {
             return (
                 <div className="Notices">
@@ -34,15 +40,15 @@ class NoticeBoard extends Component {
                                     key={key}
                                     notice={notice} />
                             } else {
-                                return null
+                                return null;
                             }
                         })}
                 </div>
             )
         } else {
-            return (null)
-        }
-    }
+            return (null);
+        };
+    };
 }
 
 export default NoticeBoard;

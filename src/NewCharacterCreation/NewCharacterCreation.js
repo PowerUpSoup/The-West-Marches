@@ -10,7 +10,7 @@ class NewCharacterCreation extends Component {
 
     handleSubmitCharacterCreate = (e) => {
         e.preventDefault();
-        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
         const character = {
             "user_id": sessionStorageUser.id,
             "name": this.refs.characterUsername.value.toLowerCase()
@@ -25,17 +25,16 @@ class NewCharacterCreation extends Component {
             return res.json()
         })
             .then((data) => {
-                this.context.addCharacter(data)
-                this.showInviteSuccessMessage()
+                this.context.addCharacter(data);
+                this.showInviteSuccessMessage();
             }).catch(error => {
                 console.error({ error })
             })
         }
 
         showInviteSuccessMessage() {
-            const InviteSuccessMessage = document.querySelector('.createCharacterMessage')
-    
-            InviteSuccessMessage.classList.remove('hidden')
+            const InviteSuccessMessage = document.querySelector('.createCharacterMessage');
+            InviteSuccessMessage.classList.remove('hidden');
         }
 
 
@@ -43,7 +42,7 @@ class NewCharacterCreation extends Component {
         return (
             <div className="createCharacterDiv">
                 <form onSubmit={(e) => {
-                    this.handleSubmitCharacterCreate(e)
+                    this.handleSubmitCharacterCreate(e);
                 }}>
                     <label>Character Name:</label>
                     <input type="text"
@@ -57,8 +56,8 @@ class NewCharacterCreation extends Component {
                     <Link className="createCharacterMessageHomeButton" to="/home">Return to Home</Link>
                 </section>
             </div>
-        )
-    }
+        );
+    };
 }
 
 export default NewCharacterCreation;
