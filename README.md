@@ -8,7 +8,12 @@ This application was made using React, CSS, Node, Express, and PostgreSQL.
 
 There is also an api for managing calls to a server. This is a RESTful api for managing users, characters notices and players and characters associated with notices.
 
+<<<<<<< HEAD
 Scripts Start the application npm start
+=======
+Scripts
+Start the application npm start
+>>>>>>> aeb86fea7039b215cd61ae19338c3d57986930d3
 
 Start nodemon for the application npm run dev
 
@@ -16,4 +21,12 @@ Run the tests npm test
 
 Endpoints
 
+<<<<<<< HEAD
 /users /characters /notices /notices/players /notices/characters
+=======
+/users 
+/characters 
+/notices 
+/notices/players 
+/notices/characters
+>>>>>>> aeb86fea7039b215cd61ae19338c3d57986930d3
