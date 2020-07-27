@@ -18,20 +18,20 @@ class Login extends Component {
             this.props.history.push('/home');
             } else {
                 this.showIncorrectPasswordMessage();
-        }
-    }
+        };
+    };
 
     hideIncorrectPasswordMessage() {
         const passwordMessage = document.querySelector('.incorrectUsernameOrPasswordMessage');
 
         passwordMessage.classList.add('hidden');
-    }
+    };
 
     showIncorrectPasswordMessage() {
         const passwordMessage = document.querySelector('.incorrectUsernameOrPasswordMessage');
 
         passwordMessage.classList.remove('hidden');
-    }
+    };
 
     render() {
         return (
@@ -48,7 +48,7 @@ class Login extends Component {
                 </section>
                 <section className="loginFormSection" id='login-form-section'>
                     <form id="login-form" onSubmit={(e) => {
-                        this.handleSubmitLogin(e)
+                        this.handleSubmitLogin(e);
                     }}>
                         <div className="username">
                             <label >Username:</label>
@@ -74,6 +74,6 @@ class Login extends Component {
             </div>
         );
     };
-}
+};
 
 export default Login;

@@ -13,29 +13,29 @@ class NewCharacterCreation extends Component {
         let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
         const character = {
             "user_id": sessionStorageUser.id,
-            "name": this.refs.characterUsername.value.toLowerCase()
-        }
+            "name": this.refs.characterUsername.value
+        };
         fetch(`${config.API_BASE_URL}/characters`, {
             method: 'post',
             headers: { 'content-Type': 'application/json' },
             body: JSON.stringify({ user_id:character.user_id, name:character.name })
         }).then(res => {
             if (!res.ok)
-                return res.json().then(e => Promise.reject(e))
-            return res.json()
+                return res.json().then(e => Promise.reject(e));
+            return res.json();
         })
             .then((data) => {
                 this.context.addCharacter(data);
                 this.showInviteSuccessMessage();
             }).catch(error => {
-                console.error({ error })
-            })
-        }
+                console.error({ error });
+            });
+        };
 
         showInviteSuccessMessage() {
             const InviteSuccessMessage = document.querySelector('.createCharacterMessage');
             InviteSuccessMessage.classList.remove('hidden');
-        }
+        };
 
 
     render() {
@@ -50,6 +50,8 @@ class NewCharacterCreation extends Component {
                         placeholder="Charater Name:"
                         ref="characterUsername"
                         required />
+
+                        <button type="submit">Submit</button>
                 </form> <br />
                 <section className="createCharacterMessage hidden">
                     <p>Character Successfully Created</p>
@@ -58,6 +60,6 @@ class NewCharacterCreation extends Component {
             </div>
         );
     };
-}
+};
 
 export default NewCharacterCreation;

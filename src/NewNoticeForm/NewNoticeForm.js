@@ -8,32 +8,32 @@ class NewNoticeForm extends Component {
 
     capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+    };
 
     checkForCharacters() {
         let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
         let characterArray = [];
         this.context.characters.map((character, key) => {
-            if (character.user_id === sessionStorageUser.user_id) {
-                characterArray.push(character)
+            if (character.user_id === sessionStorageUser.id) {
+                characterArray.push(character);
                 return null;
             } else {
                 return null;
-            }
-        })
+            };
+        });
             if (characterArray.length === 0) {
                 return true;
             } else {
                 return false;
-            }
-    }
+            };
+    };
     
 
     createNotice() {
         const notice = {
             "message": this.refs.NewNoticeMessage.value,
             "status": "Open"
-        }
+        };
         const characterName = this.refs.NewNoticeCharacter.value;
         fetch(`${config.API_BASE_URL}/notices`, {
             method: 'post',
@@ -41,66 +41,66 @@ class NewNoticeForm extends Component {
             body: JSON.stringify({ message: notice.message, status: notice.status })
         }).then(res => {
             if (!res.ok)
-                return res.json().then(e => Promise.reject(e))
-            return res.json()
+                return res.json().then(e => Promise.reject(e));
+            return res.json();
         })
             .then((data) => {
                 this.createNoticePlayer(data);
                 this.createNoticeCharacter(data, characterName);
                 this.context.addNotice(data);
             }).catch(error => {
-                console.error({ error })
-            })
-    }
+                console.error({ error });
+            });
+    };
 
     createNoticePlayer(data) {
-        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"))
+        let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
         const player = {
             "notice_id": data.id,
             "name": sessionStorageUser.username
-        }
+        };
         fetch(`${config.API_BASE_URL}/notices/players`, {
             method: 'post',
             headers: { 'content-Type': 'application/json' },
             body: JSON.stringify({ notice_id: player.notice_id, name: player.name })
         }).then(res => {
             if (!res.ok)
-                return res.json().then(e => Promise.reject(e))
-            return res.json()
+                return res.json().then(e => Promise.reject(e));
+            return res.json();
         })
             .then((data) => {
                 this.context.addNoticePlayer(data);
             }).catch(error => {
-                console.error({ error })
-            })
-    }
+                console.error({ error });
+            });
+    };
 
     createNoticeCharacter(data, characterName) {
         const character = {
             "notice_id": data.id,
             "name": characterName
-        }
+        };
         fetch(`${config.API_BASE_URL}/notices/characters`, {
             method: 'post',
             headers: { 'content-Type': 'application/json' },
             body: JSON.stringify({ notice_id: character.notice_id, name: character.name })
         }).then(res => {
             if (!res.ok)
-                return res.json().then(e => Promise.reject(e))
-            return res.json()
+                return res.json().then(e => Promise.reject(e));
+            return res.json();
         })
             .then((data) => {
                 this.context.addNoticeCharacter(data);
             }).catch(error => {
-                console.error({ error })
-            })
-    }
+                console.error({ error });
+            });
+    };
 
     handleSubmitNewNoticeForm(e) {
         e.preventDefault();
         this.createNotice();
         this.props.history.push('/home');
-    }
+    };
 
     renderNewNoticeScreen() {
         let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
@@ -137,8 +137,8 @@ class NewNoticeForm extends Component {
                     <button type="submit">Submit</button>
                 </form>
             </div>
-        )
-    }
+        );
+    };
 
     renderCharacterRequiredScreen() {
         return (
@@ -147,7 +147,7 @@ class NewNoticeForm extends Component {
                 <Link to="/new-character" className="characterRequired">Create Character</Link>
             </div>
         );
-    }
+    };
 
     render() {
         return (
@@ -158,6 +158,6 @@ class NewNoticeForm extends Component {
             </div>
         );
     };
-}
+};
 
 export default NewNoticeForm;

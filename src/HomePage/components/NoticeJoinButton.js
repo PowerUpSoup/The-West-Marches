@@ -9,14 +9,13 @@ class NoticeJoinButton extends Component {
 
     capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+    };
 
     addNewCharacterToNotice() {
-
         const noticeCharacter = {
             "notice_id": this.props.notice.id,
             "name": this.refs.NewNoticeCharacter.value
-        }
+        };
         fetch(`${config.API_BASE_URL}/notices/characters`, {
             method: 'post',
             headers: { 'content-Type': 'application/json' },
@@ -30,17 +29,16 @@ class NoticeJoinButton extends Component {
                 this.context.addNoticeCharacter(data);
             }).catch(error => {
                 console.error({ error })
-            })
-    }
+            });
+    };
 
 
     addNewPlayerToNotice() {
-
         let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
         const noticePlayer = {
             "notice_id": this.props.notice.id,
             "name": sessionStorageUser.username
-        }
+        };
         fetch(`${config.API_BASE_URL}/notices/players`, {
             method: 'post',
             headers: { 'content-Type': 'application/json' },
@@ -54,14 +52,14 @@ class NoticeJoinButton extends Component {
                 this.context.addNoticePlayer(data);
             }).catch(error => {
                 console.error({ error })
-            })
-    }
+            });
+    };
 
     handleSubmitNoticeJoinForm(e) {
         e.preventDefault();
         this.addNewCharacterToNotice();
         this.addNewPlayerToNotice();
-    }
+    };
 
     handleDMPickupNoticeSubmit(e) {
         e.preventDefault();
@@ -69,7 +67,7 @@ class NoticeJoinButton extends Component {
             "id": this.props.notice.id,
             "message": this.props.notice.message,
             "status": "Picked Up"
-        }
+        };
         fetch(`${config.API_BASE_URL}/notices/${join.id}`, {
             method: 'put',
             headers: { 'content-Type': 'application/json' },
@@ -83,8 +81,8 @@ class NoticeJoinButton extends Component {
                 this.context.joinNotice(join);
             }).catch(error => {
                 console.error({ error })
-            })
-    }
+            });
+    };
 
     handleDMCloseNoticeSubmit(e) {
         e.preventDefault();
@@ -92,7 +90,7 @@ class NoticeJoinButton extends Component {
             "id": this.props.notice.id,
             "message": this.props.notice.message,
             "status": "Closed"
-        }
+        };
         fetch(`${config.API_BASE_URL}/notices/${join.id}`, {
             method: 'put',
             headers: { 'content-Type': 'application/json' },
@@ -107,7 +105,7 @@ class NoticeJoinButton extends Component {
             }).catch(error => {
                 console.error({ error })
             })
-    }
+    };
 
     render() {
         let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
@@ -161,6 +159,6 @@ class NoticeJoinButton extends Component {
             );
         };
     };
-}
+};
 
 export default NoticeJoinButton;

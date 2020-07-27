@@ -26,7 +26,7 @@ class NoticeBoard extends Component {
                                     notice={notice} />
                                 } else {
                                     return (null);
-                                }
+                                };
                         })}
                     </div>
             );
@@ -41,14 +41,14 @@ class NoticeBoard extends Component {
                                     notice={notice} />
                             } else {
                                 return null;
-                            }
+                            };
                         })}
                 </div>
-            )
+            );
         } else {
             return (null);
         };
     };
-}
+};
 
 export default NoticeBoard;

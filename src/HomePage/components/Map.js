@@ -25,9 +25,9 @@ class Map extends Component {
         } else {
             this.props.history.push('/');
             return (null);
-        }
+        };
     };
-}
+};
 
 
 export default Map;

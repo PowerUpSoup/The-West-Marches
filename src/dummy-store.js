@@ -52,6 +52,6 @@ const STORE = {
             "status": "Open"
         },
     ]
-}
+};
 
 export default STORE;

@@ -14,7 +14,7 @@ class InvitePlayerPage extends Component {
             "password": this.refs.playerPassword.value.toLowerCase(),
             "email_address": this.refs.playerEmail.value,
             "role": this.refs.playerRole.value
-        }
+        };
         fetch(`${config.API_BASE_URL}/users`, {
             method: 'post',
             headers: { 'content-Type': 'application/json' },
@@ -25,21 +25,20 @@ class InvitePlayerPage extends Component {
             return res.json()
         })
             .then((data) => {
-                this.context.addUser(data)
-                this.showInviteSuccessMessage()
+                this.context.addUser(data);
+                this.showInviteSuccessMessage();
             }).catch(error => {
-                console.error({ error })
-            })
-        }
+                console.error({ error });
+            });
+        };
     
         showInviteSuccessMessage() {
-            const InviteSuccessMessage = document.querySelector('.inviteSuccessMessage')
+            const InviteSuccessMessage = document.querySelector('.inviteSuccessMessage');
     
-            InviteSuccessMessage.classList.remove('hidden')
-        }
+            InviteSuccessMessage.classList.remove('hidden');
+        };
 
     render() {
-
         return (
             <div>
                 <form onSubmit={(e) => {
@@ -77,9 +76,9 @@ class InvitePlayerPage extends Component {
                     <Link className="invitePlayerMessageHomeButton" to="/home">Return to Home</Link>
                 </section>
             </div>
-        )
-    }
+        );
+    };
 
-}
+};
 
 export default InvitePlayerPage;

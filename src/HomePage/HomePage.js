@@ -32,8 +32,8 @@ class HomePage extends Component {
             this.props.history.push('/');
             return (null);
         };
-    }
-}
+    };
+};
 
 
 export default HomePage;

@@ -50,49 +50,50 @@ class App extends Component {
       .catch(error => {
         console.error({ error });
       });
-  }
+  };
 
   logOutUser() {
     sessionStorage.clear();
     this.setState({
       loggedInUser: null
     });
-  }
+  };
 
   updateLoggedInUser = user => {
     this.setState({
       loggedInUser: user
     });
-  }
+  };
+
   addUser = user => {
     this.setState({
       user: this.state.users.push(user)
     });
-  }
+  };
 
   addCharacter = character => {
     this.setState({
       character: this.state.characters.push(character)
     });
-  }
+  };
 
   addNotice = notice => {
     this.setState({
       notice: this.state.notices.push(notice)
     });
-  }
+  };
 
   addNoticePlayer = noticePlayer => {
     this.setState({
       noticePlayer: this.state.noticePlayers.push(noticePlayer)
     });
-  }
+  };
 
   addNoticeCharacter = noticeCharacter => {
     this.setState({
       noticeCharacter: this.state.noticeCharacters.push(noticeCharacter)
     });
-  }
+  };
 
   joinNotice = join => {
     let newNotices = [];
@@ -106,7 +107,7 @@ class App extends Component {
     this.setState({
       notices: newNotices
     });
-  }
+  };
 
   renderNav() {
     if (this.state.loggedInUser.role === 'dungeon_master') {
@@ -126,8 +127,8 @@ class App extends Component {
       );
     } else {
       return (null);
-    }
-  }
+    };
+  };
 
   render() {
     const value = {
@@ -144,7 +145,7 @@ class App extends Component {
       addNoticeCharacter: this.addNoticeCharacter,
       joinNotice: this.joinNotice,
       logOutUser: this.logOutUser,
-    }
+    };
 
     return (
 
@@ -163,7 +164,7 @@ class App extends Component {
         </div>
       </ApiContext.Provider>
     );
-  }
-}
+  };
+};
 
 export default App;
